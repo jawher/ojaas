@@ -34,38 +34,35 @@ Using this library
 
 Here is a sample showing a job definition that'll print 'I ran' every 10 seconds :
 
-    public class DumbJob implements IJobDescriptor {
+    Dictionary<String, Object> params = new Hashtable<String, Object>();
+    params.put("ojaas.cron", "0/10 * * * * ?;5/11 * * * * ?");
+    params.put("ojaas.name", "Look Ma");
+    reg = context.registerService(Runnable.class.getName(), new Runnable() {
     
     	@Override
-    	public void deactivate() {
-    
+    	public void run() {
+    		System.out.println("Look ma, clean API !");
+    		if (Math.random() < 0.01) {
+    			Thread.currentThread().interrupt();
+    		}
     	}
+    }, params);
     
-    	@Override
-    	public void execute(Date fireTime) {
-    		System.out.println("I ran !");
-    
-    	}
-    
-    	@Override
-    	public Collection<String> getCronExpressions() {
-    		return Arrays.asList("*/10 * * * * ?");
-    	}
-    
-    	@Override
-    	public String getName() {
-    		return "Dumb job";
-    	}
-    
-    }
 
 
 For this to work, you'll need to :
-* Import the package jawher.ojaas (in MANIFEST.MF)
-* Register the job descriptor as a service with the interface jawher.ojaas.IJobDescriptor
-* Have the bundle jawher.ojaas.impl in the ACTIVE state in you OSGi container
+* Register the job's runnable as a service with the interface `java.lang.Runnable` and with the following service properties:
+** `ojaas.cron`: [Required] a comma seperated list of cron expressions according to whom the job is to be scheduled for execution
+** `ojaas.name`: [Optional] the job name 
+* Have the bundle `jawher.ojaas` in the `ACTIVE` state in you OSGi container
+
+A job can 'indicate' to the scheduler that it is to be cancelled by calling `Thread.currentThread().interrupt()`
 
 License
 -------
 
 See `LICENSE` for details.
+
+Credits
+-------
+Thanks to [Neil Bartlett](http://njbartlett.name/blog) who [suggested](http://twitter.com/njbartlett/status/16730020595) the usage of `java.lang.Runnable` and service properties instead of implementing a OJaaS-specific interface to describe jobs.
