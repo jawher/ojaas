@@ -134,7 +134,7 @@ public class TaskTracker extends ServiceTracker implements InterrupCallback {
 
 	}
 
-	@Override
+	
 	public void interrupt(Runnable job) {
 		String jobName = jobsNames.get(job);
 		if (jobName != null) {
