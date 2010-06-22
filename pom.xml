@@ -12,8 +12,7 @@
 	</properties>
 
 	<modules>
-		<module>jawher.ojaas.api</module>
-		<module>jawher.ojaas.impl</module>
+		<module>jawher.ojaas</module>
 	</modules>
 
 	<repositories>

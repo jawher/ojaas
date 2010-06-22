@@ -6,8 +6,7 @@ Bundle-Version: 1.0.0
 Bundle-Activator: jawher.ojaas.impl.Activator
 Bundle-Vendor: Jawher Moussa
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Import-Package: jawher.ojaas,
- org.osgi.framework;version="1.3.0",
+Import-Package: org.osgi.framework;version="1.3.0",
  org.osgi.util.tracker;version="1.4.2",
  org.quartz;version="1.6.2",
  org.quartz.impl;version="1.6.2",
