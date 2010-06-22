@@ -51,6 +51,7 @@ Here is a sample showing a job definition that'll print 'I ran' every 10 seconds
 
 
 For this to work, you'll need to :
+
 * Register the job's runnable as a service with the interface `java.lang.Runnable` and with the **required** service property `ojaas.cron` (a comma seperated list of cron expressions according to whom the job is to be scheduled for execution). Optionally, `ojaas.name` can be used to specify the job name. 
 * Have the bundle `jawher.ojaas` in the `ACTIVE` state in you OSGi container
 
